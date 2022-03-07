@@ -135,7 +135,7 @@ h6 {
 }
 .info .info-details {
 	flex: 1;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 .cv .contact-list {
 	font-size: 0.75rem;
