@@ -1,0 +1,149 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+* {
+	margin: 0;
+}
+
+html,
+body {
+	height: 100%;
+	background-color: #e2e2e2;
+}
+body {
+	font-family: 'Nunito', sans-serif;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+	font: inherit;
+	outline: none;
+	border: none;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+.text-center {
+	text-align: center;
+}
+.dots {
+	width: 50px;
+	height: 100%;
+
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.dots .dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 100rem;
+	background-color: #51575cc5;
+	opacity: 0.8;
+}
+.sologan {
+	font-style: italic;
+	font-size: 0.8rem;
+	font-weight: 600;
+}
+.paragraph {
+	padding-top: 0.5rem;
+}
+.paragraph h5 {
+	text-transform: uppercase;
+}
+.none-style-ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.container {
+	width: 50%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.container .cv {
+	width: 100%;
+	height: 90vh;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	border-radius: 4px;
+}
+.cv .nav-ios {
+	width: 100%;
+	height: 25px;
+	border-radius: 4px 4px 0 0;
+	background-color: #9eadba;
+}
+.cv .name {
+	width: 88%;
+	margin: 0 auto;
+	padding: 0.7rem 0;
+	font-weight: 600;
+}
+.cv .info {
+	display: flex;
+	width: 100%;
+	height: calc(100% - 72px);
+}
+.cv .contact-details {
+	width: 70%;
+	margin: 0 auto;
+	padding: 1.1rem;
+}
+.info .info-contact {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+.info-contact .contact-image {
+	width: 100%;
+	height: 80%;
+}
+.info-contact .contact-image img {
+	width: 75%;
+	height: 94%;
+	object-fit: cover;
+	margin: 0 auto;
+	border-radius: 2px;
+	opacity: 0.98;
+}
+.info .info-details {
+	flex: 1;
+}
+.cv .contact-list {
+	font-size: 0.75rem;
+	font-weight: 550;
+}
+.paragraph .description,
+.paragraph ul {
+	padding: 0 0.9rem;
+	text-align: justify;
+	font-size: 0.8rem;
+}
