@@ -137,6 +137,15 @@ h6 {
 	flex: 1;
 	overflow-y: scroll;
 }
+.info .info-details::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.info .info-details {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
 .cv .contact-list {
 	font-size: 0.75rem;
 	font-weight: 550;
