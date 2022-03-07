@@ -84,7 +84,6 @@ h6 {
 	display: flex;
 	align-items: center;
 	margin: 0 auto;
-	overflow: hidden;
 }
 .container .cv {
 	width: 100%;
@@ -136,6 +135,7 @@ h6 {
 }
 .info .info-details {
 	flex: 1;
+	overflow: hidden;
 }
 .cv .contact-list {
 	font-size: 0.75rem;
