@@ -1,0 +1,163 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+<!-- Modal add -->
+<div class="modal fade" id="ModalAdd" tabindex="-1" aria-labelledby="ModalAddLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Add Product Form</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				 <span>Name</span><br />
+				<input type="text" name="Name" class="form-control" id="name"  />
+				 <span>Category</span><br />
+				<input type="text" name="Category" id="category" class="form-control"  />
+				 <span>Price</span><br />
+				<input type="text" name="Price" id="price" class="form-control" />
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="add">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal edit  -->
+<div class="modal fade" id="ModalEdit" tabindex="-1" aria-labelledby="ModalEditLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Edit Product Form</h5>
+				<button type="button" id="close-edit" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+			</div>
+			<div class="modal-body">
+				 <span>Name</span><br />
+				<input type="text" name="Name" class="form-control" id="name-edit"  />
+				 <span>Category</span><br />
+				<input type="text" name="Category" id="category-edit" class="form-control"  />
+				 <span>Price</span><br />
+				<input type="text" name="Price" id="price-edit" class="form-control" />
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="edit">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="productListRender">
+</div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAdd">
+	Add Product
+</button>
+
+<script>
+	  const $=document.querySelector.bind(document)
+	  const $$=document.querySelectorAll.bind(document)
+
+	  $("#add").addEventListener("click",()=>{
+		  const name= $("#name").value
+		  const category= $("#category").value
+		  const price= $("#price").value
+		  if(name&&category&&price)
+		  {
+			  const product={name,category,price}
+			  const productList= JSON.parse(localStorage.getItem("productList"))||[]
+			  productList.push(product)
+			  localStorage.setItem("productList",JSON.stringify(productList))
+			  window.dispatchEvent( new Event('storage') )
+		  }
+	  })
+	  const handelDelete=(e)=>{
+		  const index= e.getAttribute('data-id')
+		  const productList= JSON.parse(localStorage.getItem("productList"))||[]
+		  productList.splice(index,1)
+		  localStorage.setItem("productList",JSON.stringify(productList))
+	      window.dispatchEvent( new Event('storage') )
+	  }
+	  const saveChangesUpdate=(productEdit,productList)=>{
+		  const name=$("#name-edit")
+		  const category= $("#category-edit")
+		  const price= $("#price-edit")
+		  productEdit.name=name.value
+		  productEdit.category = category.value
+		  productEdit.price=price.value
+		  localStorage.setItem("productList",JSON.stringify(productList))
+	      window.dispatchEvent( new Event('storage') )
+		  $('#close-edit').click()
+	  }
+
+	  const handelUpdate=(e)=>{
+		  const index= e.getAttribute('data-id')
+		  const name=$("#name-edit")
+		  const category= $("#category-edit")
+		  const price= $("#price-edit")
+		  const productList= JSON.parse(localStorage.getItem("productList"))||[]
+		  const productEdit= productList[index]
+		  name.value=productEdit.name
+		  category.value=productEdit.category
+		  price.value=productEdit.price
+		  $('#edit').addEventListener('click',()=>{
+	
+			  saveChangesUpdate(productEdit,productList)
+		  })
+		  
+	  }
+	  const handelRenderProduct=()=>{
+		  const productListRender=$('#productListRender')
+		  const productList= JSON.parse(localStorage.getItem("productList"))||[]
+		  let html=`
+		   <table class="table table-bordered table-condensed table-hover">
+		   <thead>
+			   <tr>
+				   <th>Name</td>
+				   <th>Category</th>
+				   <th>Price</th>
+				   <th>Actions</th>
+			   </tr>
+		   </thead>
+		   <tbody id="form-list-client-body">
+			 `
+			   productList.map((item,index)=>{
+				 html+=` <tr>
+						   <td>${item?.name}</td>
+						  <td>${item?.category}</td>
+							<td>${item?.price}</td>
+						   <td>
+							<button type="button" 
+							        data-id='${index}' 
+									onclick='handelUpdate(this)' 
+									class="btn btn-primary edit"
+									data-bs-toggle="modal" 
+									data-bs-target="#ModalEdit"
+							>
+								<i class="fa-solid fa-pen-to-square"></i>
+							</button>
+							<button 
+								type="button" 
+								data-id='${index}' 
+								onclick='handelDelete(this)' 
+								class="btn btn-danger delete "
+							>
+								<i class="fa-solid fa-trash-can"></i>
+							</button>
+							 
+						   </td>
+						 </tr>
+						`
+			  })
+			  html+=`</tbody>
+						</table>`
+			productListRender.innerHTML=html
+	  }
+	  handelRenderProduct()
+	 
+	window.addEventListener("storage", (e)=>{
+		  handelRenderProduct()
+	});
+		
+
+</script>
